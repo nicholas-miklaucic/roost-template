@@ -19,7 +19,7 @@ class CompositionEmbedding(torch.nn.Module):
         )
         self.head = nn.Linear(elem_hidden_dim, comp_embed_dim)
         self.rescale = nn.Parameter(
-            torch.tensor(rescale_init, dtype=torch.float32).log(), requires_grad=False
+            torch.tensor(rescale_init, dtype=torch.float32).sqrt()
         )
 
     def embed(self, X):
@@ -34,8 +34,4 @@ class CompositionEmbedding(torch.nn.Module):
         return self.to_probability(dists)
 
     def to_probability(self, dists):
-        return torch.clamp(
-            torch.tanh(torch.clamp(dists * torch.exp(self.rescale), 1e-2, 2.65)),
-            1e-3,
-            1 - 1e-3,
-        )
+        return torch.clamp(torch.exp(-dists * self.rescale**2), 1e-3, 1 - 1e-3)

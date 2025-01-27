@@ -9,7 +9,7 @@ from model import CompositionEmbedding
 
 
 # %%
-model = torch.load("checkpoints/test.pt")
+model = torch.load("checkpoints/exp2.pt")
 model
 
 # %%
