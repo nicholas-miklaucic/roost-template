@@ -78,7 +78,7 @@ def collate_batch(samples):
         batch_nbr_idx.append(nbr_idx + cry_base_idx)
 
         # mapping from atoms to crystals
-        crystal_elem_idx.append(torch.tensor([idx] * n_sites))
+        crystal_elem_idx.append(torch.ones(n_sites, dtype=torch.long) * idx)
 
         # increment the id counter
         cry_base_idx += n_sites
