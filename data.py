@@ -6,9 +6,6 @@ from aviary.roost.model import DescriptorNetwork
 from pymatgen.core import Composition
 from torch import Tensor, LongTensor
 
-device = "cuda"
-torch.set_default_device(device)
-
 elem_embs = pd.read_json(
     "https://raw.githubusercontent.com/CompRhys/aviary/refs/heads/main/aviary/embeddings/element/onehot112.json"
 )
